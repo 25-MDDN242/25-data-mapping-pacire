@@ -23,8 +23,6 @@ function setup () {
   colorMode(HSB);
 }
 
-//let X_STOP = 640;
-//let Y_STOP = 480;
 let X_STOP = 1920;
 let Y_STOP = 1080;
 let OFFSET = 20;
@@ -32,9 +30,9 @@ let OFFSET = 20;
 let renderCounter=0;
 function draw () {
   angleMode(DEGREES);
-  let num_lines_to_draw = 40;
+  let num_lines = 40;
   // get one scanline
-  for(let j=renderCounter; j<renderCounter+num_lines_to_draw && j<Y_STOP; j++) {
+  for(let j=renderCounter; j<renderCounter+num_lines && j<Y_STOP; j++) {
     for(let i=0; i<X_STOP; i++) {
       colorMode(RGB);
       let mask = maskImg.get(i, j);
@@ -46,16 +44,12 @@ function draw () {
         let slip = map(wave, -1, 1, -OFFSET, OFFSET);
         pix = sourceImg.get(i+slip, j);
 
-        // let brt = map(wave, -1, 1, 0, 255);
-        // for(let c=0; c<3; c++) {
-        //   pix[c] = brt;
-        // }
       }
 
       set(i, j, pix);
     }
   }
-  renderCounter = renderCounter + num_lines_to_draw;
+  renderCounter = renderCounter + num_lines;
   updatePixels();
 
   // print(renderCounter);
